@@ -11,9 +11,11 @@ declare(strict_types=1);
  */
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
-use InspiredMinds\ContaoLottiePlayer\Controller\ContentElement\LottiePlayerController;
+use InspiredMinds\ContaoLottiePlayer\ContentElement\LottiePlayerElement;
 
-$GLOBALS['TL_DCA']['tl_content']['palettes'][LottiePlayerController::TYPE] = $GLOBALS['TL_DCA']['tl_content']['palettes']['headline'];
+$GLOBALS['TL_DCA']['tl_content']['palettes'][LottiePlayerElement::TYPE] = $GLOBALS['TL_DCA']['tl_content']['palettes']['headline'];
+$GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC']['load_callback']['lottiePlayer'] =
+    [\InspiredMinds\ContaoLottiePlayer\DataContainer\ContentContainer::class, 'onSingleSRCLoadCallback'];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['lottie_options'] = [
     'exclude' => true,
@@ -33,5 +35,5 @@ PaletteManipulator::create()
     ->addLegend('lottie_legend', 'type_legend', PaletteManipulator::POSITION_AFTER)
     ->addField('singleSRC', 'lottie_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('lottie_options', 'lottie_legend', PaletteManipulator::POSITION_APPEND)
-    ->applyToPalette(LottiePlayerController::TYPE, 'tl_content')
+    ->applyToPalette(LottiePlayerElement::TYPE, 'tl_content')
 ;

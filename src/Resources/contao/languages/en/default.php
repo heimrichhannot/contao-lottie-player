@@ -10,6 +10,6 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-use InspiredMinds\ContaoLottiePlayer\Controller\ContentElement\LottiePlayerController;
+use InspiredMinds\ContaoLottiePlayer\ContentElement\LottiePlayerElement;
 
-$GLOBALS['TL_LANG']['CTE'][LottiePlayerController::TYPE] = ['Lottie Player', 'Plays Lottie or Telegram Sticker animations.'];
+$GLOBALS['TL_LANG']['CTE'][LottiePlayerElement::TYPE] = ['Lottie Player', 'Plays Lottie or Telegram Sticker animations.'];

@@ -2,9 +2,3 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        bind:
-            $projectDir: '%kernel.project_dir%'
-    
-    InspiredMinds\ContaoLottiePlayer\:
-        resource: ../../
-        exclude: ../../{ContaoManager,Model,DependencyInjection,Resources}
