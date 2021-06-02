@@ -2,6 +2,11 @@
 
 <?php $this->block('content'); ?>
 
-  <<?= $this->playerType ?>-player <?php foreach ($this->lottie_options as $option): ?><?= $option ?> <?php endforeach ?>src="<?= $this->singleSRC ?>"<?= $this->playerStyle ?>></<?= $this->playerType ?>-player>
+    <?php if ($this->lottieFallbackImage): ?>
+        <div class="lottie-player-fallback">
+            <img src="<?= $this->lottieFallbackImage ?>" alt="<?= $this->lottieFallbackImageAlt ?>" hidden>
+        </div>
+    <?php endif ?>
+    <<?= $this->playerType ?>-player <?php foreach ($this->lottie_options as $option): ?><?= $option ?> <?php endforeach ?>src="<?= $this->singleSRC ?>"<?= $this->playerStyle ?>></<?= $this->playerType ?>-player>
 
 <?php $this->endblock(); ?>

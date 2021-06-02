@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 $GLOBALS['TL_LANG']['tl_content']['lottie_legend'] = 'Lottie player';
 $GLOBALS['TL_LANG']['tl_content']['lottie_options'] = ['Player options', 'Enables certain options for the Lottie player.'];
+$GLOBALS['TL_LANG']['tl_content']['lottieFallbackImage'] = ['Image fallback', 'Select image to be displayed if browser does not support html CustomElements.'];
 $GLOBALS['TL_LANG']['tl_content']['lottie_options_reference'] = [
     'autoplay' => 'Autoplay animation',
     'controls' => 'Show controls',

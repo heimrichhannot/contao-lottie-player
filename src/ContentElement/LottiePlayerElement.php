@@ -42,6 +42,7 @@ class LottiePlayerElement extends ContentElement
             return '';
         }
         $file = FilesModel::findByUuid($this->singleSRC);
+        $fallbackImage = FilesModel::findByUuid($this->lottieFallbackImage);
 
         if (null === $file || !\in_array($file->extension, ['json', 'tgs'], true)) {
             return '';
@@ -63,6 +64,8 @@ class LottiePlayerElement extends ContentElement
         $this->Template->playerType = $playerType;
         $this->Template->singleSRC = '/'.$file->path;
         $this->Template->lottie_options = StringUtil::deserialize($this->objModel->lottie_options, true);
+        $this->Template->lottieFallbackImage = '/'.$fallbackImage->path;
+        $this->Template->lottieFallbackImageAlt = $fallbackImage->alt ?: '';
 
         $this->addScript($playerType);
 
@@ -71,12 +74,14 @@ class LottiePlayerElement extends ContentElement
 
     public function addScript(string $playerType = 'lottie'): void
     {
-        if (!empty($GLOBALS['TL_HEAD'][$playerType.'-player-script'])) {
-            return;
+        if (empty($GLOBALS['TL_HEAD'][$playerType.'-player-script'])) {
+            $script = Template::generateScriptTag('bundles/contaolottieplayer/'.$playerType.'-player.js', true);
+            $script = str_replace('<script', '<script id="'.$playerType.'-player-script"', $script);
+            $GLOBALS['TL_HEAD'][$playerType.'-player-script'] = $script;
         }
 
-        $script = Template::generateScriptTag('bundles/contaolottieplayer/'.$playerType.'-player.js', true);
-        $script = str_replace('<script', '<script id="'.$playerType.'-player-script"', $script);
-        $GLOBALS['TL_HEAD'][$playerType.'-player-script'] = $script;
+        if (empty($GLOBALS['TL_HEAD']['lottie-player-compat'])) {
+            $GLOBALS['TL_HEAD']['lottie-player-compat'] = Template::generateScriptTag('bundles/contaolottieplayer/lottie-browser-compatibility.js', false);
+        }
     }
 }
